@@ -3,12 +3,13 @@ class AuthorsController < ApplicationController
 
   def index
     authors = Author.all 
-    render json: authors
+    # posts.tags is nested - need to use this syntax to access nested data
+    render json: authors, include: ['profile', 'posts', 'posts.tags']
   end
 
   def show
     author = Author.find(params[:id])
-    render json: author
+    render json: author, include: ['profile', 'posts', 'posts.tags']
   end
 
   private
